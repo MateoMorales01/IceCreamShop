@@ -289,7 +289,7 @@ public class UserInterface {
             if (choice == 0) {
                 addingToppings = false;
             } else {
-                ShakeTopping topping = toppings[choice - 1];
+                ShakeToppings topping = topping[choice - 1];
                 shake.addTopping(topping);
                 System.out.printf(" %s added", topping.getDisplay());
             }
@@ -305,10 +305,10 @@ public class UserInterface {
         currentOrder.getItems().forEach(item -> {
             System.out.printf("Item %d:", itemNumber.getAndIncrement());
             if (item instanceof IceCream) {
-                System.out.printf("%s", item.getDescription());
+                System.out.printf("%s", item.getClass());
                 System.out.printf("Price: $%.2f", item.getPrice());
             } else {
-                System.out.printf("%s", item.getDescription());
+                System.out.printf("%s", item.getClass());
             }
         });
 

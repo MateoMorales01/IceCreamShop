@@ -32,4 +32,7 @@ public class Shake {
     public static Shake[] getAllSizes() {
         return new Shake[]{SMALL, MEDIUM, LARGE};
     }
+
+    public void addTopping(ShakeToppings topping) {
+    }
 }
