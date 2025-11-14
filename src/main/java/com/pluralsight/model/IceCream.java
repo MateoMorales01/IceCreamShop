@@ -19,4 +19,10 @@ public class IceCream {
     public void addPremiumTopping(Toppings toppingType, boolean extra) {
 
     }
+
+    public void addToppings(Toppings toppingType) {
+    }
+
+    public void addSauce(Syrups sauceType) {
+    }
 }

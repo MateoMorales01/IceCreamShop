@@ -16,25 +16,24 @@ public class UserInterface {
     }
 
     public void start() {
-        System.out.printf("╔════════════════════════════════╗%n");
-        System.out.printf("║   Welcome to Sweet Scoops! 🍦  ║%n");
-        System.out.printf("║    Your Ice Cream Paradise     ║%n");
-        System.out.printf("╚════════════════════════════════╝%n");
+        System.out.printf("╔════════════════════════════════╗");
+        System.out.printf("║   Welcome to Ice Cream Shop!   ║");
+        System.out.printf("║    Your Ice Cream Paradise     ║");
+        System.out.printf("╚════════════════════════════════╝");
 
         boolean running = true;
         while (running) {
             running = showHomeScreen();
         }
 
-        System.out.printf("%nThank you for visiting Sweet Scoops!%n");
-        System.out.printf("Have a sweet day! 🍦%n");
+        System.out.println("Take Care!");
         scanner.close();
     }
 
     private boolean showHomeScreen() {
-        System.out.printf("%n=== Home Screen ===%n");
-        System.out.printf("1) New Order%n");
-        System.out.printf("0) Exit%n");
+        System.out.printf("=== Home Screen ===");
+        System.out.printf("1) New Order");
+        System.out.printf("0) Exit");
         System.out.printf("Select an option: ");
 
         String choice = scanner.nextLine().trim();
@@ -45,14 +44,14 @@ public class UserInterface {
         } else if (choice.equals("0")) {
             return false;
         } else {
-            System.out.printf("Invalid option. Please try again.%n");
+            System.out.printf("Invalid option. Please try again.");
             return true;
         }
     }
 
     private void startNewOrder() {
         currentOrder = new Order();
-        System.out.printf("%n🍨 --- New Order Started --- 🍨%n");
+        System.out.printf("🍨 --- New Order Started --- 🍨");
         showOrderScreen();
     }
 
@@ -60,11 +59,11 @@ public class UserInterface {
         boolean ordering = true;
 
         while (ordering) {
-            System.out.printf("%n=== Order Screen ===%n");
-            System.out.printf("1) Add Ice Cream%n");
-            System.out.printf("2) Add Shake%n");
-            System.out.printf("3) Checkout%n");
-            System.out.printf("0) Cancel Order%n");
+            System.out.printf("=== Order Screen ===");
+            System.out.printf("1) Add Ice Cream");
+            System.out.printf("2) Add Shake");
+            System.out.printf("3) Checkout");
+            System.out.printf("0) Cancel Order");
             System.out.printf("Select an option: ");
 
             String choice = scanner.nextLine().trim();
@@ -79,30 +78,30 @@ public class UserInterface {
                     ordering = false;
                 }
             } else if (choice.equals("0")) {
-                System.out.printf("Order cancelled.%n");
+                System.out.printf("Order cancelled.");
                 currentOrder = null;
                 ordering = false;
             } else {
-                System.out.printf("Invalid option. Please try again.%n");
+                System.out.printf("Invalid option. Please try again.");
             }
         }
     }
 
     private boolean validateOrder() {
         if (currentOrder.isEmpty()) {
-            System.out.printf("Cannot checkout with an empty order!%n");
+            System.out.println("Cannot checkout with an empty order!");
             return false;
         }
         return true;
     }
 
     private void addIceCream() {
-        System.out.printf("%n🍦 --- Create Your Ice Cream --- 🍦%n");
+        System.out.println("🍦 --- Create Your Ice Cream --- 🍦");
 
-        System.out.printf("%nSelect number of scoops (max 3):%n");
+        System.out.println("%nSelect number of scoops (max 3):");
         Scoops[] sizes = Scoops.getAllSizes();
         IntStream.range(0, sizes.length).forEach(i ->
-                System.out.printf("%d) %s - $%.2f (%d flavor%s max)%n",
+                System.out.printf("%d) %s - $%.2f (%d flavor%s max)",
                         i + 1, sizes[i].getDisplay(), sizes[i].getBasePrice(),
                         sizes[i].getNumberOfScoops(),
                         sizes[i].getNumberOfScoops() > 1 ? "s" : "")
@@ -111,12 +110,12 @@ public class UserInterface {
         int sizeChoice = getIntInput(1, sizes.length);
         Scoops size = sizes[sizeChoice - 1];
 
-        System.out.printf("%nSelect container:%n");
+        System.out.println("Select container:");
         ConeType[] containers = ConeType.getAllTypes();
         IntStream.range(0, containers.length).forEach(i -> {
             String priceStr = containers[i].getPrice() > 0 ?
                     String.format(" (+$%.2f)", containers[i].getPrice()) : "";
-            System.out.printf("%d) %s%s%n", i + 1, containers[i].getDisplay(), priceStr);
+            System.out.printf("%d) %s%s", i + 1, containers[i].getDisplay(), priceStr);
         });
         System.out.printf("Choice: ");
         int containerChoice = getIntInput(1, containers.length);
@@ -126,24 +125,23 @@ public class UserInterface {
 
         addFlavors(iceCream);
         addPremiumToppings(iceCream);
-        addMixIns(iceCream);
         addRegularToppings(iceCream);
         addSauces(iceCream);
 
         currentOrder.addItem(iceCream);
-        System.out.printf("%n✓ Ice cream added to order!%n");
+        System.out.printf("Ice cream added to order!");
     }
 
     private void addFlavors(IceCream iceCream) {
-        System.out.printf("%nSelect flavors (you can choose up to %d):%n", iceCream.getMaxFlavors());
+        System.out.printf("Select flavors (you can choose up to %d):", iceCream.getMaxFlavors());
         Flavors[] flavors = Flavors.getAllTypes();
 
         while (iceCream.getCurrentFlavorCount() < iceCream.getMaxFlavors()) {
-            System.out.printf("%nAvailable flavors:%n");
+            System.out.printf("Available flavors:");
             IntStream.range(0, flavors.length).forEach(i ->
-                    System.out.printf("%d) %s%n", i + 1, flavors[i].getDisplay())
+                    System.out.printf("%d) %s", i + 1, flavors[i].getDisplay())
             );
-            System.out.printf("0) Done selecting flavors%n");
+            System.out.printf("0) Done selecting flavors");
             System.out.printf("Choice: ");
 
             int choice = getIntInput(0, flavors.length);
@@ -152,33 +150,33 @@ public class UserInterface {
             } else {
                 Flavors flavors1 = flavors[choice - 1];
                 if (iceCream.addFlavor(flavors1)) {
-                    System.out.printf("✓ %s added (%d/%d)%n",
+                    System.out.printf("%s added (%d/%d)",
                             flavors1.getDisplay(),
                             iceCream.getCurrentFlavorCount(),
                             iceCream.getMaxFlavors());
                 } else {
-                    System.out.printf("Cannot add more flavors!%n");
+                    System.out.printf("Cannot add more flavors!");
                     break;
                 }
             }
         }
 
         if (iceCream.getCurrentFlavorCount() == 0) {
-            System.out.printf("No flavor selected. Adding Vanilla by default.%n");
+            System.out.printf("No flavor selected. Adding Vanilla by default.");
             iceCream.addFlavor(Flavors.VANILLA);
         }
     }
 
     private void addPremiumToppings(IceCream iceCream) {
-        System.out.printf("%nAdd premium toppings (enter 0 when done):%n");
+        System.out.printf("Add premium toppings (enter 0 when done):");
         Toppings[] toppings = Toppings.getAllTypes();
 
         boolean addingToppings = true;
         while (addingToppings) {
             IntStream.range(0, toppings.length).forEach(i ->
-                    System.out.printf("%d) %s%n", i + 1, toppings[i].getDisplay())
+                    System.out.printf("%d) %s", i + 1, toppings[i].getDisplay())
             );
-            System.out.printf("0) Done adding premium toppings%n");
+            System.out.printf("0) Done adding premium toppings");
             System.out.printf("Choice: ");
 
             int choice = getIntInput(0, toppings.length);
@@ -189,9 +187,9 @@ public class UserInterface {
                 System.out.printf("Extra portion? (yes/no): ");
                 String extraChoice;
                 extraChoice = scanner.nextLine().trim().toLowerCase();
-                boolean extra = extraChoice.equals("yes") || extraChoice.equals("y");
+                boolean extra = extraChoice.equals("yes");
                 iceCream.addPremiumTopping(toppingType, extra);
-                System.out.printf(" %s added%s%n",
+                System.out.printf(" %s added%s",
                         toppingType.getDisplay(),
                         extra ? " (Extra)" : "");
             }
@@ -199,13 +197,13 @@ public class UserInterface {
     }
 
     private void addRegularToppings(IceCream iceCream) {
-        System.out.printf("%nAdd free toppings (enter 0 when done):%n");
-        RegularToppingType[] toppings = RegularToppingType.getAllTypes();
+        System.out.printf("Add free toppings (enter 0 when done):");
+        Toppings[] toppings = Toppings.getAllTypes();
 
         boolean addingToppings = true;
         while (addingToppings) {
             IntStream.range(0, toppings.length).forEach(i ->
-                    System.out.printf("%d) %s%n", i + 1, toppings[i].getDisplay())
+                    System.out.printf("%d) %s", i + 1, toppings[i].getDisplay())
             );
             System.out.printf("0) Done adding toppings%n");
             System.out.printf("Choice: ");
@@ -214,23 +212,23 @@ public class UserInterface {
             if (choice == 0) {
                 addingToppings = false;
             } else {
-                RegularToppingType toppingType = toppings[choice - 1];
-                iceCream.addRegularTopping(toppingType);
-                System.out.printf("✓ %s added%n", toppingType.getDisplay());
+                Toppings toppingType = toppings[choice - 1];
+                iceCream.addToppings(toppingType);
+                System.out.printf(" %s added", toppingType.getDisplay());
             }
         }
     }
 
     private void addSauces(IceCream iceCream) {
-        System.out.printf("%nAdd sauces (enter 0 when done):%n");
+        System.out.printf("Add sauces (enter 0 when done):");
         Syrups[] sauces = Syrups.getAllTypes();
 
         boolean addingSauces = true;
         while (addingSauces) {
             IntStream.range(0, sauces.length).forEach(i ->
-                    System.out.printf("%d) %s%n", i + 1, sauces[i].getDisplay())
+                    System.out.printf("%d) %s", i + 1, sauces[i].getDisplay())
             );
-            System.out.printf("0) Done adding sauces%n");
+            System.out.printf("0) Done adding sauces");
             System.out.printf("Choice: ");
 
             int choice = getIntInput(0, sauces.length);
@@ -239,18 +237,18 @@ public class UserInterface {
             } else {
                 Syrups sauceType = sauces[choice - 1];
                 iceCream.addSauce(sauceType);
-                System.out.printf("✓ %s added%n", sauceType.getDisplay());
+                System.out.printf(" %s added", sauceType.getDisplay());
             }
         }
     }
 
     private void addShake() {
-        System.out.printf("%n🥤 --- Create Your Shake --- 🥤%n");
+        System.out.printf("🥤 --- Create Your Shake --- 🥤");
 
-        System.out.printf("%nSelect shake flavor:%n");
+        System.out.printf("Select shake flavor:");
         ShakeFlavor[] flavors = ShakeFlavor.getAllFlavors();
         IntStream.range(0, flavors.length).forEach(i ->
-                System.out.printf("%d) %s%n", i + 1, flavors[i].getDisplay())
+                System.out.printf("%d) %s", i + 1, flavors[i].getDisplay())
         );
         System.out.printf("Choice: ");
         int Flavors = getIntInput(1, flavors.length);
@@ -258,10 +256,10 @@ public class UserInterface {
         flavorChoice = 0;
         ShakeFlavor flavor = flavors[flavorChoice - 1];
 
-        System.out.printf("%nSelect shake size:%n");
+        System.out.printf("Select shake size:");
         Shake[] sizes = Shake.getAllSizes();
         IntStream.range(0, sizes.length).forEach(i ->
-                System.out.printf("%d) %s - $%.2f%n", i + 1, sizes[i].getDisplay(), sizes[i].getPrice())
+                System.out.printf("%d) %s - $%.2f", i + 1, sizes[i].getDisplay(), sizes[i].getPrice())
         );
         System.out.printf("Choice: ");
         int sizeChoice = getIntInput(1, sizes.length);
@@ -271,20 +269,20 @@ public class UserInterface {
         addShakeToppings(shake);
 
         currentOrder.addItem(shake);
-        System.out.printf("%n✓ Shake added to order!%n");
+        System.out.printf("Shake added to order!");
     }
 
     private void addShakeToppings(Shake shake) {
-        System.out.printf("%nAdd shake toppings (enter 0 when done):%n");
+        System.out.printf("Add shake toppings (enter 0 when done):");
         ShakeTopping[] toppings = ShakeTopping.getAllToppings();
 
         boolean addingToppings = true;
         while (addingToppings) {
             IntStream.range(0, toppings.length).forEach(i ->
-                    System.out.printf("%d) %s (+$%.2f)%n",
+                    System.out.printf("%d) %s (+$%.2f)",
                             i + 1, toppings[i].getDisplay(), toppings[i].getPrice())
             );
-            System.out.printf("0) Done adding toppings%n");
+            System.out.printf("0) Done adding toppings");
             System.out.printf("Choice: ");
 
             int choice = getIntInput(0, toppings.length);
@@ -293,40 +291,40 @@ public class UserInterface {
             } else {
                 ShakeTopping topping = toppings[choice - 1];
                 shake.addTopping(topping);
-                System.out.printf("✓ %s added%n", topping.getDisplay());
+                System.out.printf(" %s added", topping.getDisplay());
             }
         }
     }
 
     private void checkout() {
-        System.out.printf("%n╔════════════════════════════════╗%n");
-        System.out.printf("║        ORDER SUMMARY           ║%n");
-        System.out.printf("╚════════════════════════════════╝%n");
+        System.out.printf("╔════════════════════════════════╗");
+        System.out.printf("║        ORDER SUMMARY           ║");
+        System.out.printf("╚════════════════════════════════╝");
 
         AtomicInteger itemNumber = new AtomicInteger(1);
         currentOrder.getItems().forEach(item -> {
-            System.out.printf("%nItem %d:%n", itemNumber.getAndIncrement());
+            System.out.printf("Item %d:", itemNumber.getAndIncrement());
             if (item instanceof IceCream) {
                 System.out.printf("%s", item.getDescription());
-                System.out.printf("Price: $%.2f%n", item.getPrice());
+                System.out.printf("Price: $%.2f", item.getPrice());
             } else {
-                System.out.printf("%s%n", item.getDescription());
+                System.out.printf("%s", item.getDescription());
             }
         });
 
         System.out.printf("%n════════════════════════════════%n");
-        System.out.printf("TOTAL: $%.2f%n", currentOrder.getTotalPrice());
+        System.out.printf("TOTAL: $%.2f", currentOrder.getTotalPrice());
         System.out.printf("════════════════════════════════%n");
 
-        System.out.printf("%nConfirm order? (yes/no): ");
+        System.out.printf("Confirm order? (yes/no): ");
         String confirm = scanner.nextLine().trim().toLowerCase();
 
-        if (confirm.equals("yes") || confirm.equals("y")) {
+        if (confirm.equals("yes")) {
             ReceiptManager.saveReceipt(currentOrder);
-            System.out.printf("%n✓ Order complete! Enjoy your ice cream! 🍦%n");
+            System.out.printf("Order complete! Enjoy your ice cream! 🍦");
             currentOrder = null;
         } else {
-            System.out.printf("Order cancelled.%n");
+            System.out.printf("Order cancelled.");
             currentOrder = null;
         }
     }
