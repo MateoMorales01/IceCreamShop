@@ -26,3 +26,12 @@ The class relies on several external classes (like `Order`, `IceCream`, `Shake`,
 ## 🚀 `IceCreamApp.java` Summary
 
 The `IceCreamApp` class serves as the **entry point** for the application. Its `main` method simply creates an instance of the `UserInterface` and calls its `start()` method to begin the application's execution.
+
+<img width="1920" height="1128" alt="Screenshot 2025-11-14 002206" src="https://github.com/user-attachments/assets/a7a3aa6e-1c63-44df-b325-1eb77ccbafc7" />
+
+<img width="1920" height="1128" alt="Screenshot 2025-11-14 002221" src="https://github.com/user-attachments/assets/eda2b172-4cea-4c3e-9c28-808b31443e52" />
+
+<img width="1920" height="1128" alt="Screenshot 2025-11-14 002247" src="https://github.com/user-attachments/assets/051d99d0-5d37-4954-9959-8c054e5fba25" />
+
+The one thing I found interesting is how many classes this project took to make the user interface function as a Menu and how often methods tend to nest within each other from Menus to submenus.
+
