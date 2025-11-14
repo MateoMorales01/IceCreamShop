@@ -16,10 +16,10 @@ public class UserInterface {
     }
 
     public void start() {
-        System.out.printf("╔════════════════════════════════╗");
-        System.out.printf("║   Welcome to Ice Cream Shop!   ║");
-        System.out.printf("║    Your Ice Cream Paradise     ║");
-        System.out.printf("╚════════════════════════════════╝");
+        System.out.println("╔════════════════════════════════╗");
+        System.out.println("║   Welcome to Ice Cream Shop!   ║");
+        System.out.println("║    Your Ice Cream Paradise     ║");
+        System.out.println("╚════════════════════════════════╝");
 
         boolean running = true;
         while (running) {
@@ -31,10 +31,10 @@ public class UserInterface {
     }
 
     private boolean showHomeScreen() {
-        System.out.printf("=== Home Screen ===");
-        System.out.printf("1) New Order");
-        System.out.printf("0) Exit");
-        System.out.printf("Select an option: ");
+        System.out.println("=== Home Screen ===");
+        System.out.println("1) New Order");
+        System.out.println("0) Exit");
+        System.out.println("Select an option: ");
 
         String choice = scanner.nextLine().trim();
 
@@ -44,14 +44,14 @@ public class UserInterface {
         } else if (choice.equals("0")) {
             return false;
         } else {
-            System.out.printf("Invalid option. Please try again.");
+            System.out.println("Invalid option. Please try again.");
             return true;
         }
     }
 
     private void startNewOrder() {
         currentOrder = new Order();
-        System.out.printf("🍨 --- New Order Started --- 🍨");
+        System.out.println("🍨 --- New Order Started --- 🍨");
         showOrderScreen();
     }
 
@@ -59,12 +59,12 @@ public class UserInterface {
         boolean ordering = true;
 
         while (ordering) {
-            System.out.printf("=== Order Screen ===");
-            System.out.printf("1) Add Ice Cream");
-            System.out.printf("2) Add Shake");
-            System.out.printf("3) Checkout");
-            System.out.printf("0) Cancel Order");
-            System.out.printf("Select an option: ");
+            System.out.println("=== Order Screen ===");
+            System.out.println("1) Add Ice Cream");
+            System.out.println("2) Add Shake");
+            System.out.println("3) Checkout");
+            System.out.println("0) Cancel Order");
+            System.out.println("Select an option: ");
 
             String choice = scanner.nextLine().trim();
 
@@ -78,11 +78,11 @@ public class UserInterface {
                     ordering = false;
                 }
             } else if (choice.equals("0")) {
-                System.out.printf("Order cancelled.");
+                System.out.println("Order cancelled.");
                 currentOrder = null;
                 ordering = false;
             } else {
-                System.out.printf("Invalid option. Please try again.");
+                System.out.println("Invalid option. Please try again.");
             }
         }
     }
@@ -98,7 +98,7 @@ public class UserInterface {
     private void addIceCream() {
         System.out.println("🍦 --- Create Your Ice Cream --- 🍦");
 
-        System.out.println("%nSelect number of scoops (max 3):");
+        System.out.println("Select number of scoops (max 3):");
         Scoops[] sizes = Scoops.getAllSizes();
         IntStream.range(0, sizes.length).forEach(i ->
                 System.out.printf("%d) %s - $%.2f (%d flavor%s max)",
@@ -106,7 +106,7 @@ public class UserInterface {
                         sizes[i].getNumberOfScoops(),
                         sizes[i].getNumberOfScoops() > 1 ? "s" : "")
         );
-        System.out.printf("Choice: ");
+        System.out.println("Choice: ");
         int sizeChoice = getIntInput(1, sizes.length);
         Scoops size = sizes[sizeChoice - 1];
 
@@ -117,7 +117,7 @@ public class UserInterface {
                     String.format(" (+$%.2f)", containers[i].getPrice()) : "";
             System.out.printf("%d) %s%s", i + 1, containers[i].getDisplay(), priceStr);
         });
-        System.out.printf("Choice: ");
+        System.out.println("Choice: ");
         int containerChoice = getIntInput(1, containers.length);
         ConeType container = containers[containerChoice - 1];
 
@@ -129,7 +129,7 @@ public class UserInterface {
         addSauces(iceCream);
 
         currentOrder.addItem(iceCream);
-        System.out.printf("Ice cream added to order!");
+        System.out.println("Ice cream added to order!");
     }
 
     private void addFlavors(IceCream iceCream) {
