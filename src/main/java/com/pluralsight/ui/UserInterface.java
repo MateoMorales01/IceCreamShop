@@ -265,7 +265,7 @@ public class UserInterface {
         int sizeChoice = getIntInput(1, sizes.length);
         ShakeSize size = sizes[sizeChoice - 1];
 
-        Shake shake = new Shake(size, flavor);
+        Shake shake = new Shake(1.50, Flavors);
         addShakeToppings(shake);
 
         currentOrder.addItem(shake);
