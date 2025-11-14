@@ -7,4 +7,8 @@ public class Order {
     public Object getTotalPrice() {
         return null;
     }
+
+    public Iterable<Object> getItems() {
+        return null;
+    }
 }

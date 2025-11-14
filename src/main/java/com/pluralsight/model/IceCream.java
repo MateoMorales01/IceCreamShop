@@ -15,4 +15,8 @@ public class IceCream {
 
     public boolean addFlavor(Flavors flavors1) {
     }
+
+    public void addPremiumTopping(Toppings toppingType, boolean extra) {
+
+    }
 }
