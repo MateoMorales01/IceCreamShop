@@ -1,7 +1,6 @@
 package com.pluralsight.data;
 import com.pluralsight.model.Order;
 import com.pluralsight.model.Scoops;
-
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.File;

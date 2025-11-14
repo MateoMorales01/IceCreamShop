@@ -5,5 +5,6 @@ public class ShakeFlavor {
     }
 
     public Object getDisplay() {
+        return null;
     }
 }

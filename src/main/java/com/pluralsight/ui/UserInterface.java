@@ -39,7 +39,7 @@ public class UserInterface {
         String choice = scanner.nextLine().trim();
 
         if (choice.equals("1")) {
-            startNewOrder();
+            showOrderScreen();
             return true;
         } else if (choice.equals("0")) {
             return false;
@@ -49,13 +49,11 @@ public class UserInterface {
         }
     }
 
-    private void startNewOrder() {
+    private void showOrderScreen() {
         currentOrder = new Order();
         System.out.println("🍨 --- New Order Started --- 🍨");
         showOrderScreen();
-    }
 
-    private void showOrderScreen() {
         boolean ordering = true;
 
         while (ordering) {
@@ -141,8 +139,8 @@ public class UserInterface {
             IntStream.range(0, flavors.length).forEach(i ->
                     System.out.printf("%d) %s", i + 1, flavors[i].getDisplay())
             );
-            System.out.printf("0) Done selecting flavors");
-            System.out.printf("Choice: ");
+            System.out.println("0) Done selecting flavors");
+            System.out.println("Choice: ");
 
             int choice = getIntInput(0, flavors.length);
             if (choice == 0) {
@@ -155,20 +153,20 @@ public class UserInterface {
                             iceCream.getCurrentFlavorCount(),
                             iceCream.getMaxFlavors());
                 } else {
-                    System.out.printf("Cannot add more flavors!");
+                    System.out.println("Cannot add more flavors!");
                     break;
                 }
             }
         }
 
         if (iceCream.getCurrentFlavorCount() == 0) {
-            System.out.printf("No flavor selected. Adding Vanilla by default.");
+            System.out.println("No flavor selected. Adding Vanilla by default.");
             iceCream.addFlavor(Flavors.VANILLA);
         }
     }
 
     private void addPremiumToppings(IceCream iceCream) {
-        System.out.printf("Add premium toppings (enter 0 when done):");
+        System.out.println("Add premium toppings (enter 0 when done):");
         Toppings[] toppings = Toppings.getAllTypes();
 
         boolean addingToppings = true;
@@ -243,25 +241,25 @@ public class UserInterface {
     }
 
     private void addShake() {
-        System.out.printf("🥤 --- Create Your Shake --- 🥤");
+        System.out.println("🥤 --- Create Your Shake --- 🥤");
 
-        System.out.printf("Select shake flavor:");
+        System.out.println("Select shake flavor:");
         ShakeFlavor[] flavors = ShakeFlavor.getAllFlavors();
         IntStream.range(0, flavors.length).forEach(i ->
                 System.out.printf("%d) %s", i + 1, flavors[i].getDisplay())
         );
-        System.out.printf("Choice: ");
+        System.out.println("Choice: ");
         int Flavors = getIntInput(1, flavors.length);
         int flavorChoice;
         flavorChoice = 0;
         ShakeFlavor flavor = flavors[flavorChoice - 1];
 
-        System.out.printf("Select shake size:");
+        System.out.println("Select shake size:");
         Shake[] sizes = Shake.getAllSizes();
         IntStream.range(0, sizes.length).forEach(i ->
                 System.out.printf("%d) %s - $%.2f", i + 1, sizes[i].getDisplay(), sizes[i].getPrice())
         );
-        System.out.printf("Choice: ");
+        System.out.println("Choice: ");
         int sizeChoice = getIntInput(1, sizes.length);
         ShakeSize size = sizes[sizeChoice - 1];
 
@@ -269,11 +267,11 @@ public class UserInterface {
         addShakeToppings(shake);
 
         currentOrder.addItem(shake);
-        System.out.printf("Shake added to order!");
+        System.out.println("Shake added to order!");
     }
 
     private void addShakeToppings(Shake shake) {
-        System.out.printf("Add shake toppings (enter 0 when done):");
+        System.out.println("Add shake toppings (enter 0 when done):");
         ShakeTopping[] toppings = ShakeTopping.getAllToppings();
 
         boolean addingToppings = true;
@@ -282,8 +280,8 @@ public class UserInterface {
                     System.out.printf("%d) %s (+$%.2f)",
                             i + 1, toppings[i].getDisplay(), toppings[i].getPrice())
             );
-            System.out.printf("0) Done adding toppings");
-            System.out.printf("Choice: ");
+            System.out.println("0) Done adding toppings");
+            System.out.println("Choice: ");
 
             int choice = getIntInput(0, toppings.length);
             if (choice == 0) {
@@ -297,9 +295,9 @@ public class UserInterface {
     }
 
     private void checkout() {
-        System.out.printf("╔════════════════════════════════╗");
-        System.out.printf("║        ORDER SUMMARY           ║");
-        System.out.printf("╚════════════════════════════════╝");
+        System.out.println("╔════════════════════════════════╗");
+        System.out.println("║        ORDER SUMMARY           ║");
+        System.out.println("╚════════════════════════════════╝");
 
         AtomicInteger itemNumber = new AtomicInteger(1);
         currentOrder.getItems().forEach(item -> {
@@ -312,19 +310,19 @@ public class UserInterface {
             }
         });
 
-        System.out.printf("%n════════════════════════════════%n");
+        System.out.println("════════════════════════════════");
         System.out.printf("TOTAL: $%.2f", currentOrder.getTotalPrice());
-        System.out.printf("════════════════════════════════%n");
+        System.out.println("════════════════════════════════");
 
-        System.out.printf("Confirm order? (yes/no): ");
+        System.out.println("Confirm order? (yes/no): ");
         String confirm = scanner.nextLine().trim().toLowerCase();
 
         if (confirm.equals("yes")) {
             ReceiptManager.saveReceipt(currentOrder);
-            System.out.printf("Order complete! Enjoy your ice cream! 🍦");
+            System.out.println("Order complete! Enjoy your ice cream! 🍦");
             currentOrder = null;
         } else {
-            System.out.printf("Order cancelled.");
+            System.out.println("Order cancelled.");
             currentOrder = null;
         }
     }
@@ -340,7 +338,7 @@ public class UserInterface {
                     System.out.printf("Please enter a number between %d and %d: ", min, max);
                 }
             } catch (NumberFormatException e) {
-                System.out.printf("Invalid input. Please enter a number: ");
+                System.out.println("Invalid input. Please enter a number: ");
             }
         }
     }

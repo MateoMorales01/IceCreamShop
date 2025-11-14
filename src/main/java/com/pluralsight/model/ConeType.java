@@ -1,9 +1,9 @@
 package com.pluralsight.model;
 
 public class ConeType {
-    public static final ConeType CUP = new ConeType("Cup", 0.00);
-    public static final ConeType SUGAR_CONE = new ConeType("Sugar Cone", 0.50);
-    public static final ConeType WAFFLE_CONE = new ConeType("Waffle Cone", 1.00);
+    public static final ConeType CUP = new ConeType("Cup", 0.50);
+    public static final ConeType SUGAR_CONE = new ConeType("Sugar Cone", 1.50);
+    public static final ConeType WAFFLE_CONE = new ConeType("Waffle Cone", 2.50);
 
     private final String display;
     private final double price;
